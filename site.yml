@@ -1,0 +1,26 @@
+---
+# this playbook contains the stuff for chat.harmonyapp.io idk
+
+- hosts: all
+  roles:
+  - role: common
+
+- hosts: legato_servers
+  roles:
+  - role: legato
+
+- hosts: scherzo_servers
+  roles:
+  - role: scherzo
+
+- hosts: caddy_servers
+  roles:
+  - role: caddy
+
+- hosts: redis_servers
+  roles:
+  - role: redis
+
+- hosts: postgres_servers
+  roles:
+  - role: postgres

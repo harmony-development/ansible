@@ -1,0 +1,59 @@
+---
+# install and set up postgres
+
+- name: Install PostgreSQL
+  dnf:
+    name:
+    - postgresql-server
+    - postgresql-contrib
+    state: latest
+
+- name: Find out if PostgreSQL is initialized
+  stat:
+    path: /var/lib/pgsql/data/pg_hba.conf
+  register: postgres_data
+
+- name: Initialize PostgreSQL
+  shell: postgresql-setup initdb
+  when: not postgres_data.stat.exists
+
+- name: Start PostgreSQL systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: postgresql
+
+- name: Set up PostgreSQL database
+  become_user: postgres
+  postgresql_db:
+    name: harmonydb
+    state: present
+
+- name: Set up PostgreSQL user
+  become_user: postgres
+  postgresql_user:
+    name: harmonydb
+    password: harmonydb
+    state: present
+
+- name: Grant user access to DB
+  become_user: postgres
+  postgresql_privs:
+    type: database
+    database: harmonydb
+    roles: harmonydb
+    grant_option: no
+    privs: all
+
+- name: Allow MD5 connection for user
+  become_user: postgres
+  notify: restart postgres
+  postgresql_pg_hba:
+    dest: "~/data/pg_hba.conf"
+    contype: host
+    databases: all
+    method: md5
+    users: harmonydb
+    create: true

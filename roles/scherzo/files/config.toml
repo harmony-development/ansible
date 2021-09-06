@@ -1,0 +1,20 @@
+host = "scherzo.harmonyapp.io:2289"
+server_description = ""
+listen_on_localhost = true
+disable_ratelimits = false
+port = 2222
+db_cache_limit = 1073741824
+sled_throughput_at_storage_cost = false
+
+[media]
+media_root = "./media"
+max_upload_length = 100000000
+
+[tls]
+key_file = "./key.pem"
+cert_file = "./cert.pem"
+
+[federation]
+key = "./federation_key"
+host_allow_list = []
+host_block_list = []

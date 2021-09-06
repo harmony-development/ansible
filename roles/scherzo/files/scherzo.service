@@ -1,0 +1,14 @@
+[Unit]
+Description=Scherzo Harmony Homeserver
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+User=scherzo
+WorkingDirectory=/var/lib/scherzo
+ExecStart=/opt/scherzo
+
+[Install]
+WantedBy=multi-user.target

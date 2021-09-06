@@ -1,0 +1,32 @@
+---
+# sets up scherzo on a server
+
+- name: Download Scherzo
+  get_url:
+    url: "https://github.com/harmony-development/scherzo/releases/download/continuous/scherzo"
+    dest: /opt/scherzo
+    mode: '0775'
+
+- name: Set up user for Scherzo
+  user:
+    name: scherzo
+    comment: "Scherzo User"
+    home: /var/lib/scherzo
+
+- name: Copy Scherzo systemd unit
+  copy:
+    src: scherzo.service
+    dest: /etc/systemd/system/scherzo.service
+
+- name: Copy Scherzo config
+  copy:
+    src: config.toml
+    dest: /var/lib/scherzo/config.toml
+
+- name: Start Scherzo systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: scherzo

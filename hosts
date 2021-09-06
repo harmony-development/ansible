@@ -1,0 +1,14 @@
+[legato_servers]
+chat.harmonyapp.io
+
+[scherzo_servers]
+chat.harmonyapp.io
+
+[postgres_servers]
+chat.harmonyapp.io
+
+[redis_servers]
+chat.harmonyapp.io
+
+[caddy_servers]
+chat.harmonyapp.io

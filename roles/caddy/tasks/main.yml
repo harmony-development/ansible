@@ -1,0 +1,20 @@
+---
+# install and set up caddy
+
+- name: Install Caddy
+  dnf:
+    name: caddy
+    state: latest
+
+- name: Copy Caddy Config
+  copy:
+    src: harmonyapp.caddyfile
+    dest: /etc/caddy/Caddyfile.d/harmonyapp.caddyfile
+
+- name: Start Caddy systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: caddy

@@ -1,0 +1,25 @@
+---
+# install and set up redis
+
+- name: Install Redis
+  dnf:
+    name: redis
+    state: latest
+
+- name: Copy Redis Drop-In Unit
+  copy:
+    src: systemd-redis.conf
+    dest: /etc/systemd/system/redis.conf
+
+- name: Copy Redis Config
+  copy:
+    src: redis.conf
+    dest: /etc/redis/redis-harmony.conf
+
+- name: Start Redis systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: redis

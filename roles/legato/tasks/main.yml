@@ -1,0 +1,32 @@
+---
+# sets up legato on a server
+
+- name: Download Legato
+  get_url:
+    url: "https://github.com/harmony-development/legato/releases/download/continuous/legato"
+    dest: /opt/legato
+    mode: '0775'
+
+- name: Set up user for Legato
+  user:
+    name: legato
+    comment: "Legato User"
+    home: /var/lib/legato
+
+- name: Copy Legato systemd unit
+  copy:
+    src: legato.service
+    dest: /etc/systemd/system/legato.service
+
+- name: Copy Legato config
+  copy:
+    src: config.yml
+    dest: /var/lib/legato/config.yml
+
+- name: Start Legato systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: legato

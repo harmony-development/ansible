@@ -1,0 +1,58 @@
+(cors) {
+	@origin{args.0} header Origin {args.0}
+	header Access-Control-Allow-Methods "GET,POST,OPTIONS,PUT,DELETE,PATCH"
+	header Access-Control-Allow-Origin "*"
+	header Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+}
+
+(boilerplate) {
+	log {
+		format console
+	}
+
+	encode {
+		zstd
+		gzip
+	}
+}
+
+#chat.harmonyapp.io:2289 {
+#       import boilerplate
+#       import cors chat.harmonyapp.io
+#       @options method OPTIONS
+#       @notoptions not method OPTIONS
+#       @websocket_auth header Sec-WebSocket-Protocol harmony*
+#       header @websocket_auth Sec-WebSocket-Protocol "harmony"
+#       respond @options 200
+#       reverse_proxy @notoptions 127.0.0.1:2230
+#}
+
+chat.harmonyapp.io:2289 {
+	import boilerplate
+	import cors chat.harmonyapp.io
+	@options method OPTIONS
+	@notoptions not method OPTIONS
+	@websocket_auth header Sec-WebSocket-Protocol harmony*
+	# header @websocket_auth Sec-WebSocket-Protocol "harmony"
+	respond @options 200
+	reverse_proxy @notoptions https://127.0.0.1:2222 {
+		transport http {
+			tls_trusted_ca_certs /var/lib/scherzo/cert.pem /var/lib/scherzo/key.pem
+		}
+	}
+}
+
+cockpit.harmonyapp.io {
+	reverse_proxy 127.0.0.1:9090
+}
+
+gh.harmonyapp.io {
+	redir https://github.com/harmony-development{uri}
+}
+
+chat.harmonyapp.io {
+	import boilerplate
+	import cors chat.harmonyapp.io
+
+	reverse_proxy 127.0.0.1:2290
+}
