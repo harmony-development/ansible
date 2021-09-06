@@ -1,0 +1,4 @@
+---
+- hosts: legato_servers
+  roles:
+  - role: legato

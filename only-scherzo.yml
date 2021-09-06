@@ -1,0 +1,4 @@
+---
+- hosts: scherzo_servers
+  roles:
+  - role: scherzo
