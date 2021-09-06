@@ -1,11 +1,12 @@
 ---
 # install and set up postgres
 
-- name: Install PostgreSQL
+- name: Install PostgreSQL & Tools
   dnf:
     name:
     - postgresql-server
     - postgresql-contrib
+    - python-psycopg2
     state: latest
 
 - name: Find out if PostgreSQL is initialized
@@ -25,31 +26,9 @@
     masked: no
     name: postgresql
 
-- name: Set up PostgreSQL database
+- name: Allow MD5 connection for HarmonyDB
+  become: yes
   become_user: postgres
-  postgresql_db:
-    name: harmonydb
-    state: present
-
-- name: Set up PostgreSQL user
-  become_user: postgres
-  postgresql_user:
-    name: harmonydb
-    password: harmonydb
-    state: present
-
-- name: Grant user access to DB
-  become_user: postgres
-  postgresql_privs:
-    type: database
-    database: harmonydb
-    roles: harmonydb
-    grant_option: no
-    privs: all
-
-- name: Allow MD5 connection for user
-  become_user: postgres
-  notify: restart postgres
   postgresql_pg_hba:
     dest: "~/data/pg_hba.conf"
     contype: host
@@ -57,3 +36,39 @@
     method: md5
     users: harmonydb
     create: true
+
+- name: Allow MD5 connection for Postgres
+  become: yes
+  become_user: postgres
+  postgresql_pg_hba:
+    dest: "~/data/pg_hba.conf"
+    contype: host
+    databases: all
+    method: md5
+    users: postgres
+    create: true
+
+- name: Set up PostgreSQL database
+  become: yes
+  become_user: postgres
+  postgresql_db:
+    name: harmonydb
+    state: present
+
+- name: Set up PostgreSQL user
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: harmonydb
+    password: harmonydb
+    state: present
+
+- name: Grant user access to DB
+  become: yes
+  become_user: postgres
+  postgresql_privs:
+    type: database
+    database: harmonydb
+    roles: harmonydb
+    grant_option: no
+    privs: all

@@ -5,14 +5,6 @@
   roles:
   - role: common
 
-- hosts: legato_servers
-  roles:
-  - role: legato
-
-- hosts: scherzo_servers
-  roles:
-  - role: scherzo
-
 - hosts: caddy_servers
   roles:
   - role: caddy
@@ -24,3 +16,11 @@
 - hosts: postgres_servers
   roles:
   - role: postgres
+
+- hosts: legato_servers
+  roles:
+  - role: legato
+
+- hosts: scherzo_servers
+  roles:
+  - role: scherzo
