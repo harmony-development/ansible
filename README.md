@@ -17,3 +17,9 @@ ansible-playbook legato.yml
 ```bash
 ansible-playbook scherzo.yml
 ```
+
+## Using without root
+
+```bash
+ansible-playbook file.yml -Kb --become-user root -u username
+```
