@@ -8,7 +8,7 @@ Restart=on-failure
 RestartSec=5
 User=scherzo
 WorkingDirectory=/var/lib/scherzo
-ExecStart=/opt/scherzo
+ExecStart=/opt/scherzo -d
 
 [Install]
 WantedBy=multi-user.target
