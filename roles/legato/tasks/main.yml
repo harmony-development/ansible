@@ -21,7 +21,7 @@
 - name: Copy Legato config
   copy:
     src: config.yml
-    dest: /var/lib/legato/config.yml
+    dest: /var/lib/legato/configuration.yaml
 
 - name: Start Legato systemd unit
   systemd:
