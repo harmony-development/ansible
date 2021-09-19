@@ -7,9 +7,10 @@
     state: latest
 
 - name: Copy Caddy Config
-  copy:
+  template:
     src: harmonyapp.caddyfile
     dest: /etc/caddy/Caddyfile.d/harmonyapp.caddyfile
+    chat_url: "chat.harmonyapp.io"
 
 - name: Start Caddy systemd unit
   systemd:

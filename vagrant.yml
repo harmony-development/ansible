@@ -1,0 +1,11 @@
+---
+# this playbook contains the stuff for chat.harmonyapp.io but in vagrant
+
+- hosts: all
+  roles:
+  - role: common
+  - role: caddy
+  - role: redis
+  - role: postgres
+  - role: legato
+  - role: scherzo

@@ -27,9 +27,11 @@
 #       reverse_proxy @notoptions 127.0.0.1:2230
 #}
 
-chat.harmonyapp.io:2289 {
+{{ chat_url }}:2289 {
 	import boilerplate
-	import cors chat.harmonyapp.io
+	{% if chat_url|length %}
+	import cors {{ chat_url }}
+	{% endif %}
 	@options method OPTIONS
 	@notoptions not method OPTIONS
 	@websocket_auth header Sec-WebSocket-Protocol harmony*
