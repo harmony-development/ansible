@@ -1,0 +1,4 @@
+---
+- hosts: caddy_servers
+  roles:
+  - role: caddy

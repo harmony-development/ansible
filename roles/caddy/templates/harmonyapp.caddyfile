@@ -27,6 +27,7 @@
 #       reverse_proxy @notoptions 127.0.0.1:2230
 #}
 
+{% set chat_url = 'chat.harmonyapp.io' %}
 {{ chat_url }}:2289 {
 	import boilerplate
 	{% if chat_url|length %}
@@ -37,10 +38,10 @@
 	@websocket_auth header Sec-WebSocket-Protocol harmony*
 	# header @websocket_auth Sec-WebSocket-Protocol "harmony"
 	respond @options 200
-	reverse_proxy @notoptions https://127.0.0.1:2222 {
-		transport http {
-			tls_trusted_ca_certs /var/lib/scherzo/cert.pem /var/lib/scherzo/key.pem
-		}
+	reverse_proxy @notoptions http://127.0.0.1:2222 {
+		# transport http {
+		# 	tls_trusted_ca_certs /var/lib/scherzo/cert.pem /var/lib/scherzo/key.pem
+		# }
 	}
 }
 
