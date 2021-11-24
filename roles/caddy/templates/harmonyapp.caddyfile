@@ -38,9 +38,9 @@
 	@websocket_auth header Sec-WebSocket-Protocol harmony*
 	# header @websocket_auth Sec-WebSocket-Protocol "harmony"
 	respond @options 200
-	reverse_proxy @notoptions http://127.0.0.1:2222 {
+	reverse_proxy @notoptions https://127.0.0.1:2222 {
 		transport http {
-			tls_trusted_ca_certs /var/lib/scherzo/cert.pem /var/lib/scherzo/key.pem
+			tls_trusted_ca_certs /etc/caddy/Caddyfile.d/scherzo-cert.pem /etc/caddy/Caddyfile.d/scherzo-key.pem
 		}
 	}
 }
