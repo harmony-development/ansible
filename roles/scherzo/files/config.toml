@@ -13,7 +13,7 @@ disable_ratelimits = false
 disable_registration = false
 # Maximum amount of requests that should be processed concurrently.
 # Note: you'll want to increase this if your server has 100+ members.
-max_concurrent_requests = 512
+max_concurrent_requests = 0
 
 [db]
 # Path to a directory to put db backups in.
