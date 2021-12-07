@@ -9,6 +9,7 @@ port = 2222
 [policy]
 # Whether to disable ratelimits or not (useful when testing / benching).
 disable_ratelimits = false
+client_ip_header_name = "x-forwarded-for"
 # Whether to disable registration and only allow it using admin generated tokens.
 disable_registration = false
 # Maximum amount of requests that should be processed concurrently.
