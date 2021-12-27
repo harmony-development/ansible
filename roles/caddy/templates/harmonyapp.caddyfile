@@ -2,7 +2,7 @@
 	@origin{args.0} header Origin {args.0}
 	header Access-Control-Allow-Methods "GET,POST,OPTIONS,PUT,DELETE,PATCH"
 	header Access-Control-Allow-Origin "*"
-	header Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+	header Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Hrpc-Version"
 }
 
 (boilerplate) {
