@@ -45,3 +45,9 @@ key = "./federation_key"
 host_allow_list = []
 # Which hosts to block.
 host_block_list = []
+
+[email]
+server = "localhost"
+port = 25
+from = "Harmony <noreply@harmonyapp.io>"
+credentials_file = "./email_creds.toml"
