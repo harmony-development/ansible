@@ -51,3 +51,4 @@ server = "localhost"
 port = 25
 from = "Harmony <noreply@harmonyapp.io>"
 credentials_file = "./email_creds.toml"
+tls = false
