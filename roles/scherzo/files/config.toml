@@ -1,3 +1,4 @@
+server_description = "Official Harmony server. https://github.com/harmony-development"
 # The host where this server is hosted. Eg. `harmonyapp.io:2289` or `harmonyapp.io:4444`.
 # A port must always be specified.
 host = "chat.harmonyapp.io:2289"
