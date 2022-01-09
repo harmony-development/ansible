@@ -1,0 +1,32 @@
+---
+# sets up inviter on a server
+
+- name: Download inviter
+  get_url:
+    url: "https://github.com/harmony-development/inviter/releases/download/continuous/inviter"
+    dest: /opt/inviter
+    mode: '0775'
+
+- name: Set up user for inviter
+  user:
+    name: inviter
+    comment: "Inviter User"
+    home: /var/lib/inviter
+
+- name: Copy inviter systemd unit
+  copy:
+    src: inviter.service
+    dest: /etc/systemd/system/inviter.service
+
+- name: Copy inviter config
+  copy:
+    src: config.hcl
+    dest: /var/lib/inviter/config.hcl
+
+- name: Start inviter systemd unit
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: inviter
