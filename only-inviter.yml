@@ -1,0 +1,4 @@
+---
+- hosts: inviter_servers
+  roles:
+  - role: inviter

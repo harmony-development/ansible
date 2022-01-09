@@ -24,3 +24,7 @@
 - hosts: scherzo_servers
   roles:
   - role: scherzo
+
+- hosts: inviter_servers
+  roles:
+  - role: inviter
