@@ -53,6 +53,10 @@ gh.harmonyapp.io {
 	redir https://github.com/harmony-development{uri}
 }
 
+loqui.harmonyapp.io {
+	redir https://harmonyapp.io/Loqui{uri}
+}
+
 chat.harmonyapp.io {
 	import boilerplate
 	import cors chat.harmonyapp.io
