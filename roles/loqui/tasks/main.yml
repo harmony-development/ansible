@@ -1,6 +1,11 @@
 ---
 # sets up loqui web for serve on a server
 
+- name: Create loqui dir
+  file:
+    path: /opt/loqui
+    state: directory
+    mode: '0755'
 - name: Download Loqui
   unarchive:
     src: "https://github.com/harmony-development/Loqui/releases/download/continuous/web-dist.zip"
