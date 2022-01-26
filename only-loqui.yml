@@ -1,0 +1,4 @@
+---
+- hosts: loqui_servers
+  roles:
+  - role: loqui
