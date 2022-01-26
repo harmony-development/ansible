@@ -1,0 +1,8 @@
+---
+# sets up loqui web for serve on a server
+
+- name: Download Loqui
+  unarchive:
+    src: "https://github.com/harmony-development/Loqui/releases/download/continuous/web-dist.zip"
+    dest: /opt/loqui
+    remote_src: yes

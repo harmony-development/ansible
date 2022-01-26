@@ -54,7 +54,9 @@ gh.harmonyapp.io {
 }
 
 loqui.harmonyapp.io {
-	redir https://harmonyapp.io/Loqui{uri}
+	import boilerplate
+	root * /opt/loqui/dist
+	file_server
 }
 
 chat.harmonyapp.io {

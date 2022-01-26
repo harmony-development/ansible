@@ -28,3 +28,7 @@
 - hosts: inviter_servers
   roles:
   - role: inviter
+
+- hosts: loqui_servers
+  roles:
+  - role: loqui
