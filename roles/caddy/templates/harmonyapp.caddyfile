@@ -16,17 +16,6 @@
 	}
 }
 
-#chat.harmonyapp.io:2289 {
-#       import boilerplate
-#       import cors chat.harmonyapp.io
-#       @options method OPTIONS
-#       @notoptions not method OPTIONS
-#       @websocket_auth header Sec-WebSocket-Protocol harmony*
-#       header @websocket_auth Sec-WebSocket-Protocol "harmony"
-#       respond @options 200
-#       reverse_proxy @notoptions 127.0.0.1:2230
-#}
-
 {% set chat_url = 'chat.harmonyapp.io' %}
 {{ chat_url }}:2289 {
 	import boilerplate
@@ -36,21 +25,12 @@
 	@options method OPTIONS
 	@notoptions not method OPTIONS
 	@websocket_auth header Sec-WebSocket-Protocol harmony*
-	# header @websocket_auth Sec-WebSocket-Protocol "harmony"
 	respond @options 200
 	reverse_proxy @notoptions https://127.0.0.1:2222 {
 		transport http {
 			tls_trusted_ca_certs /etc/caddy/Caddyfile.d/scherzo-cert.pem /etc/caddy/Caddyfile.d/scherzo-key.pem
 		}
 	}
-}
-
-cockpit.harmonyapp.io {
-	reverse_proxy 127.0.0.1:9090
-}
-
-gh.harmonyapp.io {
-	redir https://github.com/harmony-development{uri}
 }
 
 loqui.harmonyapp.io {
@@ -64,4 +44,12 @@ chat.harmonyapp.io {
 	import cors chat.harmonyapp.io
 
 	reverse_proxy 127.0.0.1:2290
+}
+
+cockpit.harmonyapp.io {
+	reverse_proxy 127.0.0.1:9090
+}
+
+gh.harmonyapp.io {
+	redir https://github.com/harmony-development{uri}
 }

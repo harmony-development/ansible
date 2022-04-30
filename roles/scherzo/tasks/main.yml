@@ -1,32 +1,21 @@
 ---
 # sets up scherzo on a server
 
-- name: Download Scherzo
-  get_url:
-    url: "https://github.com/harmony-development/scherzo/releases/download/continuous/scherzo"
-    dest: /opt/scherzo
-    mode: '0775'
-
-- name: Set up user for Scherzo
-  user:
-    name: scherzo
-    comment: "Scherzo User"
-    home: /var/lib/scherzo
-
-- name: Copy Scherzo systemd unit
-  copy:
-    src: scherzo.service
-    dest: /etc/systemd/system/scherzo.service
-
-- name: Copy Scherzo config
+- name: Copy scherzo config
   copy:
     src: config.toml
     dest: /var/lib/scherzo/config.toml
 
-- name: Start Scherzo systemd unit
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
-    masked: no
-    name: scherzo
+- name: Deploy scherzo docker
+  docker_container:
+    image: "yusdacra/scherzo:{{ scherzo_docker_tag }}"
+    name: "scherzo"
+    state: "started"
+    volumes:
+      - "/var/lib/scherzo/db:/srv/scherzo/db"
+      - "/var/lib/scherzo/media:/srv/scherzo/media"
+      # inject configs here
+      - "/var/lib/scherzo/config.toml:/srv/scherzo/config.toml"
+      - "/var/lib/scherzo/email_creds.toml:/srv/scherzo/email_creds.toml"
+    log_driver: "journald"
+    ports: ["2289:2289"]
